@@ -2,7 +2,7 @@ import React from 'react'
 import '../middlebar.css'
 
 function Card({ name, userIdentifiant, setProfil, profil }) {
-    console.log("pro", profil)
+    
     return (
         <div onClick={()=> setProfil({
             nom:name

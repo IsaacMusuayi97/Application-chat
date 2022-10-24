@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from "axios"
+import "./login.css"
 
-function Login() {
+export default function Login() {
 
     function handleSignIn(e) {
         const name = e.target.form["email"].value,
@@ -9,51 +10,66 @@ function Login() {
             password = e.target.form["password"].value
 
         axios.post("http://localhost:5000/api", {
-            name: name,
-            email: email,
-            password: password
-        },
-            {
-                headers: {
-                    "Content-type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            }).then((response) => {
-                console.log(response)
-            }).catch(console.log)
+            name,
+            email,
+            password
+        })
+            .then((data) => {
+                console.log("utilisateur enregistré", data)
+            })
+
+            .catch((err) => console.log(err))
 
     }
 
     return (
-        <div>
-            <form className="form">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="name"
-                    className="form--input"
-                />
-                <input
-                    type="text"
-                    name="email"
-                    placeholder="email"
-                    className="form--input"
-                />
-                <input
-                    type="text"
-                    name="password"
-                    placeholder="password"
-                    className="form--input"
-                />
-                <button onClick={handleSignIn}
-                    className="form--button"
-                    type="button"
-                >
-                    Enregistrer
-                </button>
+        <div className='login'>
+            <form className="form1">
+                <h1>Sign up</h1>
+                <div className='container--inputs'>
+                    <div >
+                        <label for="name">Email</label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="name"
+                            className="form--input"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="email">Password</label>
+                        <input
+                            type="text"
+                            name="email"
+                            placeholder="email"
+                            className="form--input"
+                        />
+
+                    </div>
+
+                    <div>
+                        <label for="password">Password</label>
+                        <input
+                            type="text"
+                            name="password"
+                            placeholder="password"
+                            className="form--input"
+                        />
+
+                    </div>
+
+                    <div>
+                        <button onClick={handleSignIn}
+                            className="Sign-btn"
+                            type="button"
+                        >
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     )
 }
 
-export default Login

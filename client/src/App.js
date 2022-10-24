@@ -5,8 +5,9 @@ import Sidebar from './component/Sidebar';
 import Middlebar from './component/Middlebar';
 import Signin from './component/Signin';
 import Login from './component/Login';
-import { dataContext } from "./Context"
-import axios from "axios"
+import { dataContext } from "./Context";
+import {Routes, Route, Navigate} from "react-router-dom"
+import axios from "axios";
 import React, {useEffect, useState } from 'react';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
 
   const [converse, setConverse] = useState([])
   const [profil, setProfil] = useState({
-    nom:"1"
+    nom:""
   })
   console.log("set",profil)
 
@@ -29,7 +30,7 @@ function App() {
     })
         .then((res) => {
             setUser(res.data)
-            // console.log("data",res.data)
+            console.log("data",res.data)
         })
         .catch((error) => console.error(error))
 }, [])
@@ -38,6 +39,11 @@ function App() {
 
     <dataContext.Provider value={{ user, setUser, token, setToken, converse, setConverse }}>
       <div className="App">
+        <Routes>
+          <Route path='/' element={<Signin/>}/>
+        </Routes>
+        <Signin/>
+        <Login />
         <Sidebar />
         <Middlebar setProfil={setProfil} profil={profil}/>
         <Body profil={profil}/>
