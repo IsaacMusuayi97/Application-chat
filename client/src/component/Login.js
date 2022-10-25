@@ -1,13 +1,16 @@
 import React from 'react'
 import axios from "axios"
 import "./login.css"
+import { Link } from 'react-router-dom'
 
 export default function Login() {
 
     function handleSignIn(e) {
-        const name = e.target.form["email"].value,
+        const name = e.target.form["name"].value,
             email = e.target.form["email"].value,
             password = e.target.form["password"].value
+
+
 
         axios.post("http://localhost:5000/api", {
             name,
@@ -15,12 +18,14 @@ export default function Login() {
             password
         })
             .then((data) => {
-                console.log("utilisateur enregistré", data)
+
             })
 
             .catch((err) => console.log(err))
 
     }
+
+
 
     return (
         <div className='login'>
@@ -28,7 +33,7 @@ export default function Login() {
                 <h1>Sign up</h1>
                 <div className='container--inputs'>
                     <div >
-                        <label for="name">Email</label>
+                        <label for="name">Name</label>
                         <input
                             type="text"
                             name="name"
@@ -60,12 +65,14 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <button onClick={handleSignIn}
-                            className="Sign-btn"
-                            type="button"
-                        >
-                            Enregistrer
-                        </button>
+                        <Link to="/">
+                            <button onClick={handleSignIn}
+                                className="Sign-btn"
+                                type="button"
+                            >
+                                Enregistrer
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </form>

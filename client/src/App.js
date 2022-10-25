@@ -1,55 +1,63 @@
 
 import './App.css';
-import Body from './component/Body';
-import Sidebar from './component/Sidebar';
-import Middlebar from './component/Middlebar';
 import Signin from './component/Signin';
 import Login from './component/Login';
 import { dataContext } from "./Context";
-import {Routes, Route, Navigate} from "react-router-dom"
+import Container from './Container';
+import { Routes, Route, Navigate } from "react-router-dom"
 import axios from "axios";
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
 
   const [user, setUser] = useState([])
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState(null)
+  console.log(token, "token4")
+  const [message, setMessage] = useState("2")
 
-  const [converse, setConverse] = useState([])
-  const [profil, setProfil] = useState({
-    nom:""
-  })
-  console.log("set",profil)
+  console.log(message, "message2")
 
+
+  const getToken = localStorage.getItem("token")
+  const getUserId = localStorage.getItem("userId")
+
+  console.log(getUserId, 'userid')
   useEffect(() => {
-    axios.get("http://localhost:5000/api", {
-        headers: {
-            "Content-type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
-        }
+    axios.get(`http://localhost:5000/api/${getUserId}`,{
+      headers: {
+        "Content-type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      }
     })
-        .then((res) => {
-            setUser(res.data)
-            console.log("data",res.data)
-        })
-        .catch((error) => console.error(error))
-}, [])
+      .then((res) => {
+        setUser(res.data)
+        console.log("data", res.data)
+      })
+      .catch((error) => console.error(error))
+  }, [])
+
+  useEffect(()=> {
+    setToken(getToken)
+  
+  }, [])
+
+  // useEffect(()=> {
+  //   axios.
+  // })
+
+  
 
   return (
-
-    <dataContext.Provider value={{ user, setUser, token, setToken, converse, setConverse }}>
-      <div className="App">
+    <div className="App">
+      <dataContext.Provider value={{ user, setUser, token, setToken, message, setMessage }}>
         <Routes>
-          <Route path='/' element={<Signin/>}/>
+          <Route path='/' element={<Signin />} />
+          { token ?<Route path='/chat' element={<Container />} /> : null}
+          <Route path='/login' element={<Login/>}/>
         </Routes>
-        <Signin/>
-        <Login />
-        <Sidebar />
-        <Middlebar setProfil={setProfil} profil={profil}/>
-        <Body profil={profil}/>
-      </div>
-    </dataContext.Provider>
-  );
+      </dataContext.Provider>
+    </div>
+  )
 }
 
 export default App;

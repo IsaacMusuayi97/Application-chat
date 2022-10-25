@@ -7,7 +7,8 @@ import { dataContext } from '../Context'
 
 function Middlebar({ setProfil, profil }) {
 
-    const { setUser, user } = useContext(dataContext)
+    const { user, setUser } = useContext(dataContext)
+    
 
     return (
         <div className='middlebar'>
@@ -19,10 +20,12 @@ function Middlebar({ setProfil, profil }) {
             <div className='container-message-recent'>
                 <h1>Recent</h1>
 
-                {user.map(data => {
+                {user.user && user.user.map(data => {
+                    
+                    
                     return (
 
-                        <Card setProfil={setProfil} profil={profil} name={data.name} key={data._id} />
+                        <Card setProfil={setProfil} profil={profil} name={data.name} key={data._id}  messages={data._id}/>
                     )
                 })}
 

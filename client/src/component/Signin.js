@@ -1,8 +1,12 @@
 import React from 'react'
 import axios from "axios"
-import signin from "./signin.css"
+import "./signin.css"
+import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 function Signin() {
+
+    const navigate = useNavigate()
 
     function handleSignIn(e) {
         e.preventDefault()
@@ -14,10 +18,17 @@ function Signin() {
             password
         }
         )
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((err)=> console.error(err))
+            .then((response) => {
+                const hash = response.data.token.split(" ")[1];
+                const userId = response.data.userId;
+                localStorage.setItem("token", hash)
+                localStorage.setItem("userId", userId)
+
+                navigate("/chat")
+
+
+            })
+            .catch((err) => console.error(err))
 
     }
     return (
@@ -26,7 +37,7 @@ function Signin() {
             <div className='container--form'>
                 <form className="form" onSubmit={handleSignIn}>
                     <h1>Login</h1>
-                    <p className='form-paraph'>Doesn't have an account yet? <a className='paraph-link'>Sign Up</a></p>
+                    <p className='form-paraph'>Doesn't have an account yet? <Link to="/login"> <a className='paraph-link'>Sign Up</a> </Link> </p>
 
                     <div className='inputs--btn'>
                         <div>
@@ -55,12 +66,14 @@ function Signin() {
                         </div>
 
                         <div>
-                            <button 
-                                className="form--button"
-                                type="submit"
-                            >
-                                Sign in
-                            </button>
+                            
+                                <button
+                                    className="form--button"
+                                    type="submit"
+                                >
+                                    Sign in
+                                </button>
+                        
                         </div>
                     </div>
                 </form>

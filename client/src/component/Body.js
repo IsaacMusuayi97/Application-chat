@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../body.css'
 import Conversation from './Conversation'
 import axios from "axios"
+import { dataContext } from '../Context'
 
-function Body({ profil }) {
-    console.log(profil,"mus")
-    const [msg, setMsg] = useState("")
+function Body({ profil, chat }) {
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000/api/message/", {
-    //         headers: {
-    //             "Content-type": "application/json",
-    //             "X-Requested-With": "XMLHttpRequest"
-    //         }
-    //     })
-    //         .then((res) => {
-    //             setUser(res.data)
-    //             // console.log("data",res.data)
-    //         })
-    //         .catch((error) => console.error(error))
-    // }, [])
+    const getUserId = localStorage.getItem("userId")
+    // console.log(getUserId, "getuser")
+    const { message, setMessage } = useContext(dataContext)
+    
+    console.log(message);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/ChatRoute/find/${getUserId}/${message}`, {
+            headers: {
+                "Content-type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+            .then((res) => {
+                
+                console.log("data22",res.data)
+        
+            })
+            .catch((error) => console.error(error))
+    }, [message])
 
 
     return (

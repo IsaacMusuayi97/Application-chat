@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { dataContext } from '../Context'
 import '../middlebar.css'
 
-function Card({ name, userIdentifiant, setProfil, profil }) {
-    
-    return (
-        <div onClick={()=> setProfil({
-            nom:name
-        })}>
+function Card({ name, userIdentifiant, setProfil, profil, messages}) {
+    const { message, setMessage } = useContext(dataContext)
 
-    
+   
+
+    function change() {
+        setProfil({nom:name})
+       setMessage(messages)
+    }
+    return (
+        <div onClick={change}>
+
+
             <div className='recent-message-profile-name'>
+                
                 <div>
                     <img className='profile-img' src='photos/usman.jpg' />
                 </div>
