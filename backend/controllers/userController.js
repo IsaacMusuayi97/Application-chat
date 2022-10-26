@@ -55,27 +55,41 @@ const loginUser = (req, res) => {
         .catch((error) => res.status(500).json({ error }))
 }
 
-const getMe = async (req, res) => {
-    console.log(req.params.id);
-    const selectUser = await User.findOne({ _id: req.params.id });
-    if (!selectUser) {
-        return res.status(404).send('user does not exist')
-    } else {
-        return res.status(200).json(selectUser)
-    }
+// const getMe = async (req, res) => {
+//     console.log(req.params.id);
+//     const selectUser = await User.findOne({ _id: req.params.id });
+//     if (!selectUser) {
+//         return res.status(404).send('user does not exist')
+//     } else {
+//         return res.status(200).json(selectUser)
+//     }
 
+// }
+
+// const getAll = async (req, res) => {
+//     console.log(req.params.id);
+//     const selectUser = await User.find();
+//     if (!selectUser) {
+//         return res.status(404).send('user does not exist')
+//     } else {
+//         return res.status(200).json(selectUser)
+//     }
+
+// }
+
+const getAll = (req, res) => {
+    const userId = req.params.id;
+    User.find({_id : {$ne : userId}})
+    .then((data)=>{
+        res.status(200).send({
+            user:data
+        })
+    }).catch((error)=>{
+        res.status(400).json(error)
+    })
 }
 
-const getAll = async (req, res) => {
-    console.log(req.params.id);
-    const selectUser = await User.find();
-    if (!selectUser) {
-        return res.status(404).send('user does not exist')
-    } else {
-        return res.status(200).json(selectUser)
-    }
 
-}
 
 const handleSignIn = (req, res) => {
     User.findOne({ email: req.body.email })
@@ -112,7 +126,6 @@ const handleSignIn = (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
-    getMe,
     getAll,
     handleSignIn
 }

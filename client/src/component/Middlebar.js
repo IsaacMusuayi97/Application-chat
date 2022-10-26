@@ -1,19 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext} from 'react'
 import '../middlebar.css'
-import axios from "axios"
 import Card from './Card'
 import { dataContext } from '../Context'
 
 
 function Middlebar({ setProfil, profil }) {
 
-    const { user, setUser } = useContext(dataContext)
+    const { user} = useContext(dataContext)
     
 
     return (
         <div className='middlebar'>
             <div className='container-search'>
-                <img className='search-icon' src='photos/icons8-search-30.png' />
+                <img className='search-icon' src='photos/icons8-search-30.png' alt=''/>
                 <input placeholder='Search' />
             </div>
 

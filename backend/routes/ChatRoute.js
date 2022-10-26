@@ -4,8 +4,8 @@ const router = express.Router()
 
 const {createChat,  userChats,  findChat} = require('../controllers/ChatController')
 
-router.post("/", createChat)
+router.post("/:firstId/:secondId/", createChat)
 router.get("/:userId", userChats)
-router.get("/find/:firstId/:secondId", findChat)
+router.get("/:chatId", findChat)
 
 module.exports = router

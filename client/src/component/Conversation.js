@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Conversation() {
+function Conversation({msg}) {
 
 
     return (
@@ -12,7 +12,7 @@ function Conversation() {
                     merci
                 </div>
                 <div className='msg1'>
-                    Bonsoir
+                    {msg}
                 </div>
             </div>
         </div>

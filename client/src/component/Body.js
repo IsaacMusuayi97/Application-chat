@@ -7,22 +7,24 @@ import { dataContext } from '../Context'
 function Body({ profil, chat }) {
 
     const getUserId = localStorage.getItem("userId")
+    const [data, setData] = useState([])
     // console.log(getUserId, "getuser")
-    const { message, setMessage } = useContext(dataContext)
-    
-    console.log(message);
+    const { message, setMessage, chatId } = useContext(dataContext)
+
+
+    console.log(chatId, "messages");
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/ChatRoute/find/${getUserId}/${message}`, {
+        axios.get(`http://localhost:5000/api/message/${chatId}`, {
             headers: {
                 "Content-type": "application/json",
                 "X-Requested-With": "XMLHttpRequest"
             }
         })
             .then((res) => {
-                
-                console.log("data22",res.data)
-        
+                setData(res.data)
+                // console.log("data22", res.data)
+
             })
             .catch((error) => console.error(error))
     }, [message])
@@ -41,7 +43,14 @@ function Body({ profil, chat }) {
                     <small>Online</small>
                 </div>
                 <div>
+                    {data.user && data.user.map(data => {
 
+                        // console.log(data.text, "message")
+                        // return (
+
+                        //     <div>{data.text} </div>
+                        // )
+                    })}
                 </div>
             </div>
             <hr className='line' />
