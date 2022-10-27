@@ -3,7 +3,6 @@ import '../sidebar.css'
 // import { userChats } from './ChatRequests'
 
 function Sidebar() {
-
   // const [chats, setChats] = useState([])
   // const [user, setUser] = useState({})
 
@@ -20,8 +19,8 @@ function Sidebar() {
   //   getChats()
   // }, [user])
   return (
-    <div className='sidebar'>
-      <img className='profile' src='photos/michael.jpg' alt=''/>
+    <div className="sidebar">
+      <img className="profile" src="photos/michael.jpg" alt="" />
     </div>
   )
 }

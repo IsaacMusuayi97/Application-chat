@@ -1,94 +1,93 @@
-
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .container--signIn {
-    display: flex;
-    background-color: #BE00F3;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  background-color: #be00f3;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
 }
 
 .container--form {
-    background-color: #FCFCFC;
-    width: 550px;
-    height: 548px;
-    margin-bottom: 4px;
-    margin-left: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #fcfcfc;
+  width: 550px;
+  height: 548px;
+  margin-bottom: 4px;
+  margin-left: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form {
-    text-align: left;
-    background-color: white;
-    padding-left: 50px;
-    padding-top: 40px;
-    width: 60%;
-    height: 400px;
-    box-shadow: 0 0 3px 3px rgba(0 0 0 / .1);
+  text-align: left;
+  background-color: white;
+  padding-left: 50px;
+  padding-top: 40px;
+  width: 60%;
+  height: 400px;
+  box-shadow: 0 0 3px 3px rgba(0 0 0 / 0.1);
 }
 
 .form h1 {
-    font-size: 25px;
-    color: #756A90;
+  font-size: 25px;
+  color: #756a90;
 }
 
 .container-signin--img {
-    margin-right: 18px;
+  margin-right: 18px;
 }
 
 .signin--img {
-    width: 550px;
-    height: 550px;
+  width: 550px;
+  height: 550px;
 }
 
-.inputs--btn  div{
- margin-top: 40px;
+.inputs--btn div {
+  margin-top: 40px;
 }
 
 .inputs--btn input {
-    height: 40px;
-    width: 80%;
-    text-indent: 10px;
-    outline: none;
-    border-width: 2px;
-    border-radius: 10px;
-    border-left-color: #fffafa;
-    border-right-color: #c4c3c3;
-    border-bottom-color: #c4c3c3;
-    border-top-color: #ffffff;
+  height: 40px;
+  width: 80%;
+  text-indent: 10px;
+  outline: none;
+  border-width: 2px;
+  border-radius: 10px;
+  border-left-color: #fffafa;
+  border-right-color: #c4c3c3;
+  border-bottom-color: #c4c3c3;
+  border-top-color: #ffffff;
 }
 
 .form label {
-    display:block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #656565;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #656565;
 }
 
 .form--button {
-    width: 82%;
-    padding: 12px 0;
-    background-color: #BE00F3;
-    border: none;
-    font-size: 16px;
-    color: white;
-    border-radius: 10px;
+  width: 82%;
+  padding: 12px 0;
+  background-color: #be00f3;
+  border: none;
+  font-size: 16px;
+  color: white;
+  border-radius: 10px;
 }
 
 .form-paraph {
-    color: #9e9ea0;
-    font-size: 16px;
-    margin-top: 10px;
+  color: #9e9ea0;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .paraph-link {
-    color: #BE00F3;
-    text-decoration: underline;
+  color: #be00f3;
+  text-decoration: underline;
 }

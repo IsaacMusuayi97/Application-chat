@@ -1,68 +1,68 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .login {
-    display: flex;
-    background-color: #BE00F3;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  background-color: #be00f3;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .form1 {
-    text-align: left;
-    background-color: white;
-    padding-left: 50px;
-    padding-top: 40px;
-    width: 40%;
-    height: 400px;
-    box-shadow: 0 0 3px 3px rgba(0 0 0 / .1);
+  text-align: left;
+  background-color: white;
+  padding-left: 50px;
+  padding-top: 40px;
+  width: 40%;
+  height: 400px;
+  box-shadow: 0 0 3px 3px rgba(0 0 0 / 0.1);
 }
 
 .form1 h1 {
-    font-size: 25px;
-    color: #756A90;
+  font-size: 25px;
+  color: #756a90;
 }
 
 .form1 label {
-    display: block;
+  display: block;
 }
 
-.container--inputs  div{
-    margin-top: 30px;
+.container--inputs div {
+  margin-top: 30px;
 }
 
 .container--inputs input {
-    height: 40px;
-    width: 80%;
-    text-indent: 10px;
-    outline: none;
-    border-width: 2px;
-    border-radius: 10px;
-    border-left-color: #fffafa;
-    border-right-color: #c4c3c3;
-    border-bottom-color: #c4c3c3;
-    border-top-color: #ffffff;
+  height: 40px;
+  width: 80%;
+  text-indent: 10px;
+  outline: none;
+  border-width: 2px;
+  border-radius: 10px;
+  border-left-color: #fffafa;
+  border-right-color: #c4c3c3;
+  border-bottom-color: #c4c3c3;
+  border-top-color: #ffffff;
 }
 
 .container--inputs label {
-    display:block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #656565;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #656565;
 }
 
 .container--inputs button {
-    width: 82%;
-    padding: 12px 0;
-    background-color: #BE00F3;
-    border: none;
-    font-size: 16px;
-    color: white;
-    border-radius: 10px;
-    outline: none;
+  width: 82%;
+  padding: 12px 0;
+  background-color: #be00f3;
+  border: none;
+  font-size: 16px;
+  color: white;
+  border-radius: 10px;
+  outline: none;
 }

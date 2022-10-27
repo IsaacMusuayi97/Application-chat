@@ -1,9 +1,12 @@
 const ChatModel = require('../models/ChatModel')
 
-const createChat = async(req, res) => {
-    console.log(req.body)
-    const newChat = new ChatModel({
-        members: [req.body.senderId, req.body.receiverId]
+const createChat = async (req, res) => {
+    console.log(req.params)
+    const chat = await ChatModel.findOne({
+        members: { $all: [req.params.firstId, req.params.secondId] }
+    })
+    const newChat = chat || new ChatModel({
+        members: [req.params.firstId, req.params.secondId],
     });
 
     try {
@@ -14,20 +17,21 @@ const createChat = async(req, res) => {
     }
 };
 
-const userChats = async(req, res)=> {
-        ChatModel.find({
-            members: {$in: [req.params.userId]}
-        })
-        .then((chat)=>{
+
+const userChats = async (req, res) => {
+    ChatModel.find({
+        members: { $in: [req.params.userId] }
+    })
+        .then((chat) => {
             res.status(200).json(chat)
         })
-        .catch((error)=> res.status(500).json(error))
+        .catch((error) => res.status(500).json(error))
 }
 
-const findChat = async(req, res)=> {
+const findChat = async (req, res) => {
     try {
         const chat = await ChatModel.findOne({
-            members: {$all: [req.params.firstId, req.params.secondId]}
+            members: { $all: [req.params.firstId, req.params.secondId] }
         })
         res.status(200).json(chat)
     } catch (error) {
