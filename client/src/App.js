@@ -13,7 +13,7 @@ function App() {
   const [chatId, setChatId] = useState('')
 
   const [message, setMessage] = useState('2')
-  console.log(message, 'messageLog')
+  // console.log(message, 'messageLog')
 
   const getToken = localStorage.getItem('token')
   const getUserId = localStorage.getItem('userId')
@@ -40,7 +40,7 @@ function App() {
       .post(`http://localhost:5000/api/ChatRoute/${getUserId}/${message}`)
       .then((res) => {
         setChatId(res.data._id)
-        console.log(res.data._id, 'isaac')
+        // console.log(res.data._id, 'isaac')
       })
       .catch((error) => console.error(error))
   }, [message])

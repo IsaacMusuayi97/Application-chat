@@ -1,12 +1,37 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { dataContext } from '../Context'
+import '../conversation.css'
 
 function Conversation() {
+  const { chatId, message } = useContext(dataContext)
+  // eslint-disable-next-line no-unused-vars
+  const [msg, setMsg] = useState([])
+  console.log(message, 'la star')
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/message/${chatId}`)
+      .then((res) => {
+        console.log(res.data, 'isaacMus')
+        setMsg(res.data)
+      })
+      .catch((error) => console.error(error))
+  }, [message])
+
+  console.log('msg ', msg)
+
   return (
-    <div>
-      <div className="chat-space-1">
-        <div className="msg">merci</div>
-        <div className="msg1"></div>
-      </div>
+    <div className="chat-space-1">
+      {msg &&
+        msg.user &&
+        msg.user.map((data) => (
+          <div key={data._id} className="msg">
+            {data.text}
+          </div>
+        ))}
+      <div className="msg"></div>
+      <div className="msg1"> comment</div>
     </div>
   )
 }

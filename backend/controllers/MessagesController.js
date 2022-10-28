@@ -3,8 +3,8 @@ const messageModel = require('../models/messageModel')
 const addMessage = async(req, res) => {
     const {userId, chatId, text} = req.body
     const message = new messageModel ( {
-        userId: req.body.userId,
-        chatId: req.body.chatId,
+        userId: req.body.userId.trim(),
+        chatId: req.body.chatId.trim(),
         text: req.body.text
     })
 message.save()

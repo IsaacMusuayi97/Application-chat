@@ -21,20 +21,13 @@
 }
 
 .chat-space {
-  height: 400px;
+  height: 385px;
   width: 500px;
   display: flex;
   flex-direction: column;
-}
-
-.chat-space-1 {
-  display: flex;
-  justify-content: space-between;
-}
-
-.msg {
-  background-color: #dfdfdf;
-  max-width: 100px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
 }
 
 .body-footer {
