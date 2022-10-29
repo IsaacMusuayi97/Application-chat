@@ -7,19 +7,20 @@ function Conversation() {
   const { chatId, message } = useContext(dataContext)
   // eslint-disable-next-line no-unused-vars
   const [msg, setMsg] = useState([])
-  console.log(message, 'la star')
+  // console.log(message, 'la star')
 
   useEffect(() => {
+    console.log('!!!!!!!!!!!!!! From conv ', chatId)
     axios
       .get(`http://localhost:5000/api/message/${chatId}`)
       .then((res) => {
-        console.log(res.data, 'isaacMus')
+        // console.log(res.data, 'isaacMus')
         setMsg(res.data)
       })
       .catch((error) => console.error(error))
-  }, [message])
+  }, [chatId, message])
 
-  console.log('msg ', msg)
+  // console.log('msg ', msg)
 
   return (
     <div className="chat-space-1">

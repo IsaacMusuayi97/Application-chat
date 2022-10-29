@@ -12,13 +12,13 @@ function App() {
   const [token, setToken] = useState(null)
   const [chatId, setChatId] = useState('')
 
-  const [message, setMessage] = useState('2')
+  const [message, setMessage] = useState('')
   // console.log(message, 'messageLog')
 
   const getToken = localStorage.getItem('token')
   const getUserId = localStorage.getItem('userId')
 
-  console.log('getUser', getUserId)
+  // console.log('getUser', getUserId)
 
   useEffect(() => {
     axios
@@ -35,15 +35,15 @@ function App() {
       .catch((error) => console.error(error))
   }, [])
 
-  useEffect(() => {
-    axios
-      .post(`http://localhost:5000/api/ChatRoute/${getUserId}/${message}`)
-      .then((res) => {
-        setChatId(res.data._id)
-        // console.log(res.data._id, 'isaac')
-      })
-      .catch((error) => console.error(error))
-  }, [message])
+  // useEffect(() => {
+  //   axios
+  //     .post(`http://localhost:5000/api/ChatRoute/${getUserId}/${message}`)
+  //     .then((res) => {
+  //       setChatId(res.data._id)
+  //       // console.log(res.data._id, 'isaac')
+  //     })
+  //     .catch((error) => console.error(error))
+  // }, [message])
 
   // console.log(chatId, 'chatId')
 

@@ -24,13 +24,6 @@ const registerUser = async (req, res) => {
         })
 
         .catch((err => res.status(400).json({ err })))
-    // try {
-    //     const response = await user.save((console.log("data1utilisateur enregistré"))).then(() => res.status(200).json({
-    //         message: "Post saved successfully !"
-    //     })).catch(err => res.send(err))
-    // } catch (error) {
-    //     res.status(500).json({ error: "erreur" })
-    // }
 
 }
 
@@ -55,27 +48,6 @@ const loginUser = (req, res) => {
         .catch((error) => res.status(500).json({ error }))
 }
 
-// const getMe = async (req, res) => {
-//     console.log(req.params.id);
-//     const selectUser = await User.findOne({ _id: req.params.id });
-//     if (!selectUser) {
-//         return res.status(404).send('user does not exist')
-//     } else {
-//         return res.status(200).json(selectUser)
-//     }
-
-// }
-
-// const getAll = async (req, res) => {
-//     console.log(req.params.id);
-//     const selectUser = await User.find();
-//     if (!selectUser) {
-//         return res.status(404).send('user does not exist')
-//     } else {
-//         return res.status(200).json(selectUser)
-//     }
-
-// }
 
 const getAll = (req, res) => {
     const userId = req.params.id;

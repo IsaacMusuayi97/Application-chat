@@ -1,31 +1,27 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useRef } from 'react'
 import '../body.css'
 import Conversation from './Conversation'
 import axios from 'axios'
 import { dataContext } from '../Context'
 
 function Body({ profil }) {
-  // const getUserId = localStorage.getItem('userId')
-  // const [data, setData] = useState([])
-  // console.log(getUserId, "getuser")
-  const { message, chatId } = useContext(dataContext)
+  const inputRef = useRef()
+  const getUserId = localStorage.getItem('userId')
+  // console.log(getUserId, 'userId')
+  const { chatId } = useContext(dataContext)
+  // console.log(message, 'inter')
+  // console.log(chatId, chatId, 'chat')
+  function sendMessage() {
+    // eslint-disable-next-line no-unused-vars
+    const text = inputRef.current.value
+    // console.log(text, 'checking')
 
-  console.log(chatId, 'messages')
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/message/${chatId}`, {
-        headers: {
-          'Content-type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-      })
-      .then((res) => {
-        // setData(res.data)
-        console.log(res.data)
-      })
-      .catch((error) => console.error(error))
-  }, [message])
+    axios.post('http://localhost:5000/api/message/', {
+      userId: getUserId,
+      chatId,
+      text,
+    })
+  }
 
   return (
     <div className="container-body">
@@ -55,10 +51,10 @@ function Body({ profil }) {
       </div>
       <div className="body-footer">
         <div className="container-typing">
-          <input />
+          <input type="text" name="message" ref={inputRef} />
           <img src="photos/icons8-camera-50.png" />
         </div>
-        <div className="button-submit">
+        <div className="button-submit" onClick={sendMessage}>
           <img src="photos/icons8-chevron.png" />
         </div>
       </div>
