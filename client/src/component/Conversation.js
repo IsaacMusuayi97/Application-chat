@@ -1,12 +1,14 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { dataContext } from '../Context'
+import Message from './Message/Message'
 import '../conversation.css'
 
 function Conversation() {
   const { chatId, message } = useContext(dataContext)
   // eslint-disable-next-line no-unused-vars
   const [msg, setMsg] = useState([])
+
   // console.log(message, 'la star')
 
   useEffect(() => {
@@ -16,6 +18,7 @@ function Conversation() {
       .then((res) => {
         // console.log(res.data, 'isaacMus')
         setMsg(res.data)
+        console.log(res.data.user, 'bleudy')
       })
       .catch((error) => console.error(error))
   }, [chatId, message])
@@ -24,15 +27,11 @@ function Conversation() {
 
   return (
     <div className="chat-space-1">
-      {msg &&
+      <Message msg={msg} />
+
+      {/* {msg &&
         msg.user &&
-        msg.user.map((data) => (
-          <div key={data._id} className="msg">
-            {data.text}
-          </div>
-        ))}
-      <div className="msg"></div>
-      <div className="msg1"> comment</div>
+        msg.user.map((data) => <Message text={data.text} key={data._id} />)} */}
     </div>
   )
 }

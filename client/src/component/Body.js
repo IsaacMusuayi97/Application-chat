@@ -8,8 +8,8 @@ function Body({ profil }) {
   const inputRef = useRef()
   const getUserId = localStorage.getItem('userId')
   // console.log(getUserId, 'userId')
-  const { chatId } = useContext(dataContext)
-  // console.log(message, 'inter')
+  const { chatId, message } = useContext(dataContext)
+  console.log(message, 'inter==========================================')
   // console.log(chatId, chatId, 'chat')
   function sendMessage() {
     // eslint-disable-next-line no-unused-vars
@@ -18,6 +18,7 @@ function Body({ profil }) {
 
     axios.post('http://localhost:5000/api/message/', {
       userId: getUserId,
+      userReceiver: message,
       chatId,
       text,
     })

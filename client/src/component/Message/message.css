@@ -1,0 +1,26 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 480px;
+  height: 500px;
+}
+.messageSender {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #1877f2;
+  color: white;
+  max-width: 300px;
+  align-self: flex-end;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+.messageReceiver {
+  background-color: rgb(245, 241, 241);
+  color: black;
+  padding: 10px;
+  border-radius: 20px;
+  align-self: flex-start;
+  max-width: 300px;
+  margin-bottom: 5px;
+}

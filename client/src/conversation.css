@@ -4,12 +4,13 @@
 }
 
 .chat-space-1 {
-  background-color: red;
+  background-color: white;
   padding-bottom: 10px;
   height: 370px;
   width: 500px;
   margin-left: 15px;
   display: flex;
-  justify-content: space-between;
   align-items: flex-end;
+  flex-direction: column;
+  overflow: auto;
 }
