@@ -21,17 +21,6 @@ function Message({ own, msg }) {
         </div>
       ))}
     </div>
-
-    // <div className="message">
-    //   {msg?.user?.map((msg) => (
-    //     <ul
-    //       key={msg._id}
-    //       className={getUserId === msg.userId ? 'message own' : 'message'}
-    //     >
-    //       <li className="messageTop"> {msg.text}</li>
-    //     </ul>
-    //   ))}
-    // </div>
   )
 }
 

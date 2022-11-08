@@ -2,7 +2,6 @@ const ChatModel = require("../models/ChatModel");
 
 
 const createChat = async (req, res) => {
-  console.log(req.params);
   
   const chat = await ChatModel.findOne({
     members: { $all: [req.params.firstId, req.params.secondId] },

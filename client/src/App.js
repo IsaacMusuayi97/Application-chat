@@ -11,7 +11,10 @@ function App() {
   const [user, setUser] = useState([])
   const [token, setToken] = useState(null)
   const [chatId, setChatId] = useState('')
-
+  const [userData, setUserData] = useState([])
+  // eslint-disable-next-line no-unused-vars
+  const [change, setChange] = useState(false)
+  console.log(userData, 'ccccccccccccccccccccccccccccccccccccccccccccc')
   const [message, setMessage] = useState('')
   // console.log(message, 'messageLog')
 
@@ -67,6 +70,10 @@ function App() {
           setMessage,
           chatId,
           setChatId,
+          userData,
+          setUserData,
+          change,
+          setChange,
         }}
       >
         <Routes>

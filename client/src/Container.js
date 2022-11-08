@@ -5,6 +5,8 @@ import Sidebar from './component/Sidebar'
 import './container.css'
 
 function Container() {
+  // eslint-disable-next-line no-unused-vars
+
   const [profil, setProfil] = useState({
     nom: '',
     chat: '',

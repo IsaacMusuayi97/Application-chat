@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios'
 import './signin.css'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { dataContext } from '../Context'
 
 function Signin() {
   const navigate = useNavigate()
+  const { setUserData } = useContext(dataContext)
 
   function handleSignIn(e) {
     e.preventDefault()
@@ -20,6 +22,7 @@ function Signin() {
       .then((response) => {
         const hash = response.data.token.split(' ')[1]
         const userId = response.data.userId
+        setUserData(response.data)
         localStorage.setItem('token', hash)
         localStorage.setItem('userId', userId)
 

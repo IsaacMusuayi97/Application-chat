@@ -3,25 +3,37 @@ import '../body.css'
 import Conversation from './Conversation'
 import axios from 'axios'
 import { dataContext } from '../Context'
+import { io } from 'socket.io-client'
 
 function Body({ profil }) {
+  const socket = useRef(io('http://localhost:5000'))
   const inputRef = useRef()
   const getUserId = localStorage.getItem('userId')
   // console.log(getUserId, 'userId')
-  const { chatId, message } = useContext(dataContext)
+  const { chatId, message, setChange } = useContext(dataContext)
   console.log(message, 'inter==========================================')
   // console.log(chatId, chatId, 'chat')
   function sendMessage() {
     // eslint-disable-next-line no-unused-vars
-    const text = inputRef.current.value
+    let text = inputRef.current.value
     // console.log(text, 'checking')
+    setChange((prev) => !prev)
 
-    axios.post('http://localhost:5000/api/message/', {
-      userId: getUserId,
-      userReceiver: message,
-      chatId,
-      text,
-    })
+    axios
+      .post('http://localhost:5000/api/message/', {
+        userId: getUserId,
+        userReceiver: message,
+        chatId,
+        text,
+      })
+      .then(() => {
+        socket.current.emit('sendMessages', {
+          userId: getUserId,
+          userReceiver: message,
+          text,
+        })
+      })
+    inputRef.current.value = ''
   }
 
   return (
