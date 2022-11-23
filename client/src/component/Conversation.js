@@ -26,13 +26,11 @@ function Conversation() {
   }, [])
 
   useEffect(() => {
-    console.log('!!!!!!!!!!!!!! From conv ', chatId)
     axios
       .get(`http://localhost:5000/api/message/${chatId}`)
       .then((res) => {
-        // console.log(res.data, 'isaacMus')
+        console.log(res.data, 'isaacMus')
         setMsg(res.data)
-        console.log(res.data.user, 'bleudy')
       })
       .catch((error) => console.error(error))
   }, [chatId, message, room])

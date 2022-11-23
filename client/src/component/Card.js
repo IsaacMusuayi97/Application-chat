@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
 import { dataContext } from '../Context'
 import axios from 'axios'
+// import imgDefault from '../media/usman.jpg'
 import '../middlebar.css'
 
-function Card({ name, setProfil, messages }) {
+function Card({ name, setProfil, messages, setProfile, picture }) {
   const getUserId = localStorage.getItem('userId')
   const { setMessage, chatId, setChatId } = useContext(dataContext)
-  console.log(chatId, 'chatId')
+  console.log(chatId)
 
   function getMessages(chatId) {
     axios
@@ -17,22 +18,19 @@ function Card({ name, setProfil, messages }) {
         },
       })
       .then((res) => {
-        // setData(res.data)
-        console.log(res.data)
+        console.log(res.data, 'zzzzzzzzzzzzzzzzzzzzzzzzzz')
       })
       .catch((error) => console.error(error))
   }
 
   function getChatId() {
     setMessage(messages)
-    console.log('============ Chatter ', messages)
-    console.log(messages, 'mus')
+
     if (messages) {
       axios
         .post(`http://localhost:5000/api/ChatRoute/${getUserId}/${messages}`)
         .then((res) => {
           setChatId(res.data._id)
-          console.log(res.data._id, 'isaac =================')
           getMessages(res.data._id)
         })
         .catch((error) => console.error(error))
@@ -40,14 +38,14 @@ function Card({ name, setProfil, messages }) {
   }
 
   function change() {
-    setProfil({ nom: name })
+    setProfil({ nom: name, profile: picture })
     getChatId()
   }
   return (
     <div onClick={change}>
       <div className="recent-message-profile-name">
         <div>
-          <img className="profile-img" src="photos/usman.jpg" />
+          <img className="profile-img" src={setProfile} />
         </div>
 
         <div className="container-name">

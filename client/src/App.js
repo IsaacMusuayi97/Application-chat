@@ -14,8 +14,9 @@ function App() {
   const [userData, setUserData] = useState([])
   // eslint-disable-next-line no-unused-vars
   const [change, setChange] = useState(false)
-  console.log(userData, 'ccccccccccccccccccccccccccccccccccccccccccccc')
   const [message, setMessage] = useState('')
+  const [sendImage, setSendImage] = useState('je suis developpeur')
+
   // console.log(message, 'messageLog')
 
   const getToken = localStorage.getItem('token')
@@ -33,30 +34,14 @@ function App() {
       })
       .then((res) => {
         setUser(res.data)
-        // console.log("data", res.data, datass)
+        console.log(res.data, 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
       })
       .catch((error) => console.error(error))
   }, [])
 
-  // useEffect(() => {
-  //   axios
-  //     .post(`http://localhost:5000/api/ChatRoute/${getUserId}/${message}`)
-  //     .then((res) => {
-  //       setChatId(res.data._id)
-  //       // console.log(res.data._id, 'isaac')
-  //     })
-  //     .catch((error) => console.error(error))
-  // }, [message])
-
-  // console.log(chatId, 'chatId')
-
   useEffect(() => {
     setToken(getToken)
   }, [])
-
-  // useEffect(()=> {
-  //   axios.
-  // })
 
   return (
     <div className="App">
@@ -74,6 +59,8 @@ function App() {
           setUserData,
           change,
           setChange,
+          sendImage,
+          setSendImage,
         }}
       >
         <Routes>

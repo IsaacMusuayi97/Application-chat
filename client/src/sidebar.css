@@ -9,6 +9,7 @@
   margin-top: 20px;
   border-radius: 16px;
   flex: 1;
+  justify-content: space-between;
 }
 
 .profile {
@@ -16,4 +17,12 @@
   width: 100px;
   height: 100px;
   border-radius: 50px;
+}
+
+.logout {
+  margin-bottom: 20px;
+  font-size: 1.875rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }

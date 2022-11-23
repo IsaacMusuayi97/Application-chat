@@ -57,7 +57,7 @@ function Signin() {
             <div>
               <label htmlFor="password">Password</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 placeholder="password"
                 className="form--input"

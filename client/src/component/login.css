@@ -1,6 +1,12 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .login {
@@ -19,7 +25,7 @@
   padding-left: 50px;
   padding-top: 40px;
   width: 40%;
-  height: 400px;
+  height: 500px;
   box-shadow: 0 0 3px 3px rgba(0 0 0 / 0.1);
 }
 
@@ -28,12 +34,55 @@
   color: #756a90;
 }
 
+.choose-profile-container {
+  height: 70px;
+  width: 70px;
+  border: 1px solid #756a90;
+  margin-top: 15px;
+  border-radius: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+}
+
+.choose-profile {
+  height: 74px;
+  width: 74px;
+  border-radius: 50%;
+}
+
+.add-image {
+  position: relative;
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-image img {
+  width: 20px;
+
+}
+
+.inputProfile {
+  position: absolute;
+  width: 18px;
+  height: 17.8px;
+  cursor: pointer;
+  opacity: 0;
+}
+
 .form1 label {
   display: block;
 }
 
 .container--inputs div {
-  margin-top: 30px;
+  margin-top: 18px;
+}
+
+.enregistreLink {
+  text-decoration: none;
+  color: white;
 }
 
 .container--inputs input {
@@ -62,7 +111,6 @@
   background-color: #be00f3;
   border: none;
   font-size: 16px;
-  color: white;
   border-radius: 10px;
   outline: none;
 }

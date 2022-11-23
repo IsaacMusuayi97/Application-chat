@@ -1,29 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import './login.css'
-import { Link } from 'react-router-dom'
+import defaultImg from '../media/icon.png'
+import choiceImg from '../media/icons8-appareil-photo.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
-  function handleSignIn(e) {
-    const name = e.target.form['name'].value,
-      email = e.target.form['email'].value,
-      password = e.target.form['password'].value
+  const navigate = useNavigate()
+  // eslint-disable-next-line no-unused-vars
+  const [profile, setProfile] = useState(defaultImg)
+  // eslint-disable-next-line no-unused-vars
+  const [claudinary, setClaudinary] = useState(defaultImg)
 
-    axios
-      .post('http://localhost:5000/api', {
-        name,
-        email,
-        password,
-      })
-      .then(() => {})
+  const formData = new FormData()
+  formData.append('file', claudinary)
+  formData.append('upload_preset', 'q94jvadi')
 
-      .catch((err) => console.log(err))
+  const handleSignIn = async (e) => {
+    e.preventDefault()
+    await axios({
+      method: 'post',
+      url: 'https://api.cloudinary.com/v1_1/dqk3p441y/upload',
+      data: formData,
+    }).then((image) => {
+      const profile = image.data.secure_url
+      const name = e.target.form['name'].value,
+        email = e.target.form['email'].value,
+        password = e.target.form['password'].value
+      axios
+        .post('http://localhost:5000/api', {
+          name,
+          email,
+          password,
+          profile,
+        })
+        .then((res) => {
+          console.log('utilisateur créé', res)
+        })
+        .catch((err) => console.log(err))
+    })
+    navigate('/')
   }
 
   return (
     <div className="login">
       <form className="form1">
         <h1>Sign up</h1>
+        <div className="choose-profile-container">
+          <img className="choose-profile" src={profile} alt="" />
+          <div className="add-image">
+            <input
+              className="inputProfile"
+              type="file"
+              onChange={(e) => {
+                setProfile(URL.createObjectURL(e.target.files[0]))
+                setClaudinary(e.target.files[0])
+              }}
+            />
+            <img className="choiceImg" src={choiceImg} alt="" />
+          </div>
+        </div>
         <div className="container--inputs">
           <div>
             <label htmlFor="name">Name</label>
@@ -36,7 +72,7 @@ export default function Login() {
           </div>
 
           <div>
-            <label htmlFor="email">Password</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               name="email"
@@ -48,7 +84,7 @@ export default function Login() {
           <div>
             <label htmlFor="password">Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder="password"
               className="form--input"
@@ -56,11 +92,9 @@ export default function Login() {
           </div>
 
           <div>
-            <Link to="/">
-              <button onClick={handleSignIn} className="Sign-btn" type="button">
-                Enregistrer
-              </button>
-            </Link>
+            <button onClick={handleSignIn} className="Sign-btn" type="button">
+              Enregistrer
+            </button>
           </div>
         </div>
       </form>

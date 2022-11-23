@@ -3,7 +3,8 @@ import '../middlebar.css'
 import Card from './Card'
 import { dataContext } from '../Context'
 
-function Middlebar({ setProfil, profil }) {
+// eslint-disable-next-line no-unused-vars
+function Middlebar({ setProfil, profil, picture }) {
   const { user } = useContext(dataContext)
 
   return (
@@ -18,8 +19,11 @@ function Middlebar({ setProfil, profil }) {
 
         {user.user &&
           user.user.map((data) => {
+            console.log(data, 'first')
             return (
               <Card
+                setProfile={data.profile}
+                picture={data.profile}
                 setProfil={setProfil}
                 profil={profil}
                 name={data.name}

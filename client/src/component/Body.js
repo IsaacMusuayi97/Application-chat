@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import '../body.css'
 import Conversation from './Conversation'
 import axios from 'axios'
@@ -9,53 +9,80 @@ function Body({ profil }) {
   const socket = useRef(io('http://localhost:5000'))
   const inputRef = useRef()
   const getUserId = localStorage.getItem('userId')
+  const [claudinary, setClaudinary] = useState('')
   // console.log(getUserId, 'userId')
-  const { chatId, message, setChange } = useContext(dataContext)
-  console.log(message, 'inter==========================================')
-  // console.log(chatId, chatId, 'chat')
-  function sendMessage() {
-    // eslint-disable-next-line no-unused-vars
-    let text = inputRef.current.value
-    // console.log(text, 'checking')
-    setChange((prev) => !prev)
+  // eslint-disable-next-line no-unused-vars
+  const { chatId, message, setChange, sendImage, setSendImage } =
+    useContext(dataContext)
 
-    axios
-      .post('http://localhost:5000/api/message/', {
-        userId: getUserId,
-        userReceiver: message,
-        chatId,
-        text,
+  const formData = new FormData()
+  formData.append('file', claudinary)
+  formData.append('upload_preset', 'q94jvadi')
+
+  const sendMessage = async (e) => {
+    e.preventDefault()
+    if (claudinary != '') {
+      await axios({
+        method: 'post',
+        url: 'https://api.cloudinary.com/v1_1/dqk3p441y/upload',
+        data: formData,
+      }).then((image) => {
+        console.log(image, 'immmmmmmmmmmmmm')
+        // eslint-disable-next-line no-unused-vars
+        const imageSent = image.data.secure_url
+        let text = inputRef.current.value
+
+        setChange((prev) => !prev)
+
+        axios
+          .post('http://localhost:5000/api/message/', {
+            userId: getUserId,
+            userReceiver: message,
+            chatId,
+            text,
+            imageSent,
+          })
+          .then(() => {
+            socket.current.emit('sendMessages', {
+              userId: getUserId,
+              userReceiver: message,
+              text,
+            })
+          })
+        inputRef.current.value = ''
       })
-      .then(() => {
-        socket.current.emit('sendMessages', {
+    } else {
+      let text = inputRef.current.value
+      axios
+        .post('http://localhost:5000/api/message/', {
           userId: getUserId,
           userReceiver: message,
+          chatId,
           text,
         })
-      })
-    inputRef.current.value = ''
+        .then(() => {
+          socket.current.emit('sendMessages', {
+            userId: getUserId,
+            userReceiver: message,
+            text,
+          })
+        })
+      inputRef.current.value = ''
+    }
   }
 
   return (
     <div className="container-body">
       <div className="container-body-profile">
         <div className="body-profile">
-          <img className="profile" src="photos/michael.jpg" />
+          <img className="profile" src={profil.profile} />
         </div>
 
         <div className="online">
           <h1>{profil.nom}</h1>
           <small>Online</small>
         </div>
-        <div>
-          {/* {data.user &&
-            data.user.map() => {
-              console.log(data.text, "message")
-              return (
-                  <div>{data.text} </div>
-              )
-            })} */}
-        </div>
+        <div></div>
       </div>
       <hr className="line" />
 
@@ -64,8 +91,23 @@ function Body({ profil }) {
       </div>
       <div className="body-footer">
         <div className="container-typing">
-          <input type="text" name="message" ref={inputRef} />
-          <img src="photos/icons8-camera-50.png" />
+          <input
+            className="textInput"
+            type="text"
+            name="message"
+            ref={inputRef}
+          />
+          <div className="container-style">
+            <input
+              className="inputStyle"
+              type="file"
+              onChange={(e) => {
+                setSendImage(URL.createObjectURL(e.target.files[0]))
+                setClaudinary(e.target.files[0])
+              }}
+            />
+            <img src="photos/icons8-camera-50.png" />
+          </div>
         </div>
         <div className="button-submit" onClick={sendMessage}>
           <img src="photos/icons8-chevron.png" />

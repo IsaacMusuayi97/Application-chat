@@ -6,11 +6,12 @@ const userModel = require("../models/userModel")
 const registerUser = async (req, res) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            const { name, email, password } = req.body
+            const { name, email, password, profile } = req.body
             const user = new User({
                 name: req.body.name,
                 email: req.body.email,
-                password: hash
+                password: hash,
+                profile: req.body.profile
             })
             user.save()
                 .then((data) => {
@@ -85,7 +86,8 @@ const handleSignIn = (req, res) => {
                             res.status(200).json({
                                 userId: user._id,
                                 token: `Bearer ${token} `,
-                                name: user.name
+                                name: user.name,
+                                profile:user.profile
                             })
                         }
                     })
