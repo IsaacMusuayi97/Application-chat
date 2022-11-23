@@ -18,28 +18,36 @@ export default function Login() {
 
   const handleSignIn = async (e) => {
     e.preventDefault()
-    await axios({
-      method: 'post',
-      url: 'https://api.cloudinary.com/v1_1/dqk3p441y/upload',
-      data: formData,
-    }).then((image) => {
-      const profile = image.data.secure_url
-      const name = e.target.form['name'].value,
-        email = e.target.form['email'].value,
-        password = e.target.form['password'].value
-      axios
-        .post('http://localhost:5000/api', {
-          name,
-          email,
-          password,
-          profile,
-        })
-        .then((res) => {
-          console.log('utilisateur créé', res)
-        })
-        .catch((err) => console.log(err))
-    })
-    navigate('/')
+    const name = e.target.form['name'].value,
+      email = e.target.form['email'].value,
+      password = e.target.form['password'].value,
+      confirmPassword = e.target.form['confirmPassword'].value
+    if (password === confirmPassword) {
+      await axios({
+        method: 'post',
+        url: 'https://api.cloudinary.com/v1_1/dqk3p441y/upload',
+        data: formData,
+      }).then((image) => {
+        const profile = image.data.secure_url
+        email
+        password
+        confirmPassword
+        axios
+          .post('http://localhost:5000/api', {
+            name,
+            email,
+            password,
+            profile,
+          })
+          .then((res) => {
+            console.log('utilisateur créé', res)
+          })
+          .catch((err) => console.log(err))
+      })
+      navigate('/')
+    } else {
+      alert('confirmez votre password svp')
+    }
   }
 
   return (
@@ -86,6 +94,16 @@ export default function Login() {
             <input
               type="password"
               name="password"
+              placeholder="password"
+              className="form--input"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password">Confirm password</label>
+            <input
+              type="password"
+              name="confirmPassword"
               placeholder="password"
               className="form--input"
             />
